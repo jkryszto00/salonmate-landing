@@ -1,0 +1,164 @@
+---
+/**
+ * Problem Section Component
+ * Highlights pain points the product solves
+ */
+
+import { problemContent } from '../../data/site';
+---
+
+<section class="problem">
+  <div class="problem-grid">
+    <div class="problem-content">
+      <h2>{problemContent.title}</h2>
+      <p>{problemContent.description}</p>
+      <ul class="problem-list">
+        {problemContent.painPoints.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="problem-visual">
+      {problemContent.stats.map((stat) => (
+        <div class="problem-card">
+          <div class="problem-card-header">
+            <span class="problem-card-title">{stat.title}</span>
+            <span class="problem-card-badge">{stat.badge}</span>
+          </div>
+          <div class="problem-card-value">{stat.value}</div>
+          <div class="problem-card-desc">{stat.desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem {
+    padding: 6rem 4rem;
+    background: var(--color-warm-black);
+    color: var(--color-cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .problem-content h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .problem-content p {
+    color: var(--color-taupe);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .problem-list {
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  .problem-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(166, 155, 141, 0.2);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 0.95rem;
+    color: var(--color-soft-brown);
+  }
+
+  .problem-list li::before {
+    content: '×';
+    color: var(--color-error);
+    font-size: 1.25rem;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+
+  .problem-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .problem-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .problem-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .problem-card-title {
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+  }
+
+  .problem-card-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(196, 113, 91, 0.2);
+    color: #e8a090;
+    border-radius: 4px;
+  }
+
+  .problem-card-value {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--color-cream);
+  }
+
+  .problem-card-desc {
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 1024px) {
+    .problem {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .problem-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .problem {
+      padding: 4rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .problem {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

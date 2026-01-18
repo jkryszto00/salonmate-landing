@@ -1,0 +1,162 @@
+---
+/**
+ * ForWho Section Component
+ * Shows ideal vs non-ideal customer profiles
+ */
+
+import Icon from '../ui/Icon.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import { forWhoContent } from '../../data/site';
+---
+
+<section class="for-who">
+  <SectionHeader
+    label="Dla kogo"
+    title="Czy SalonMate jest dla Ciebie?"
+    centered
+  />
+  <div class="for-who-grid">
+    <div class="for-who-card yes">
+      <div class="for-who-header">
+        <div class="for-who-icon">
+          <Icon name="check" size={20} />
+        </div>
+        <span class="for-who-title">{forWhoContent.ideal.title}</span>
+      </div>
+      <ul class="for-who-list">
+        {forWhoContent.ideal.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="for-who-card no">
+      <div class="for-who-header">
+        <div class="for-who-icon">
+          <Icon name="x" size={20} />
+        </div>
+        <span class="for-who-title">{forWhoContent.notIdeal.title}</span>
+      </div>
+      <ul class="for-who-list">
+        {forWhoContent.notIdeal.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .for-who {
+    padding: 6rem 4rem;
+  }
+
+  .for-who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .for-who-card {
+    padding: 2rem;
+    border: 1px solid rgba(166, 155, 141, 0.2);
+  }
+
+  .for-who-card.yes {
+    background: rgba(122, 155, 118, 0.05);
+    border-color: rgba(122, 155, 118, 0.2);
+  }
+
+  .for-who-card.no {
+    background: rgba(196, 113, 91, 0.03);
+    border-color: rgba(196, 113, 91, 0.15);
+  }
+
+  .for-who-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .for-who-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .for-who-card.yes .for-who-icon {
+    background: rgba(122, 155, 118, 0.15);
+    color: var(--color-success);
+  }
+
+  .for-who-card.no .for-who-icon {
+    background: rgba(196, 113, 91, 0.15);
+    color: var(--color-error);
+  }
+
+  .for-who-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+
+  .for-who-list {
+    list-style: none;
+  }
+
+  .for-who-list li {
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--color-warm-black);
+  }
+
+  .for-who-card.yes .for-who-list li::before {
+    content: '✓';
+    color: var(--color-success);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .for-who-card.no .for-who-list li::before {
+    content: '×';
+    color: var(--color-error);
+    font-size: 1.1rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .for-who {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .for-who-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .for-who {
+      padding: 4rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .for-who {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+/**
+ * FAQ Section Component
+ * Accordion-style frequently asked questions
+ */
+
+import Icon from '../ui/Icon.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import { faqItems } from '../../data/site';
+---
+
+<section class="faq" id="faq">
+  <div class="faq-content">
+    <SectionHeader
+      label="FAQ"
+      title="Pytania i odpowiedzi"
+    />
+    <div class="faq-grid">
+      {faqItems.map((item) => (
+        <div class="faq-item">
+          <button class="faq-question">
+            {item.question}
+            <Icon name="plus" size={20} />
+          </button>
+          <div class="faq-answer">
+            <p>{item.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: 6rem 4rem;
+  }
+
+  .faq-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-grid {
+    margin-top: 3rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-soft-brown);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    color: var(--color-warm-black);
+    transition: color 0.3s ease;
+    gap: 1rem;
+  }
+
+  .faq-question:hover {
+    color: var(--color-accent);
+  }
+
+  .faq-question :global(svg) {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item:global(.open) .faq-question :global(svg) {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq-item:global(.open) .faq-answer {
+    max-height: 300px;
+    padding-bottom: 1.25rem;
+  }
+
+  .faq-answer p {
+    color: var(--color-taupe);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1024px) {
+    .faq {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq {
+      padding: 4rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .faq {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

@@ -1,11 +1,106 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+/**
+ * SalonMate Landing Page
+ * AI receptionist for beauty salons
+ */
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Layout
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Sections
+import Nav from '../components/sections/Nav.astro';
+import StickyCta from '../components/sections/StickyCta.astro';
+import Hero from '../components/sections/Hero.astro';
+import TrustBar from '../components/sections/TrustBar.astro';
+import Problem from '../components/sections/Problem.astro';
+import MiniCta from '../components/sections/MiniCta.astro';
+import ForWho from '../components/sections/ForWho.astro';
+import Solution from '../components/sections/Solution.astro';
+import Comparison from '../components/sections/Comparison.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import Security from '../components/sections/Security.astro';
+import Features from '../components/sections/Features.astro';
+import Pricing from '../components/sections/Pricing.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import CtaSection from '../components/sections/CtaSection.astro';
+import Footer from '../components/sections/Footer.astro';
+import Modals from '../components/sections/Modals.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+  <!-- Mobile sticky CTA -->
+  <StickyCta />
+
+  <!-- Navigation -->
+  <Nav />
+
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Trust Bar / Integrations -->
+  <TrustBar />
+
+  <!-- Problem Section -->
+  <Problem />
+
+  <!-- Mini CTA 1 -->
+  <MiniCta
+    title="Brzmi znajomo?"
+    description="Dołącz do waitlisty. Pierwsze użytkowniczki testują za darmo."
+    buttonText="Chcę przetestować"
+  />
+
+  <!-- For Who Section -->
+  <ForWho />
+
+  <!-- Solution / Features -->
+  <Solution />
+
+  <!-- Comparison -->
+  <Comparison />
+
+  <!-- How It Works -->
+  <HowItWorks />
+
+  <!-- Mini CTA 2 -->
+  <MiniCta
+    title="Proste, prawda?"
+    description="Zapisz się i przetestuj przed innymi."
+    buttonText="Dołącz do waitlisty"
+  />
+
+  <!-- Security -->
+  <Security />
+
+  <!-- Additional Features -->
+  <Features />
+
+  <!-- Pricing -->
+  <Pricing />
+
+  <!-- FAQ -->
+  <FAQ />
+
+  <!-- Main CTA / Waitlist -->
+  <CtaSection />
+
+  <!-- Footer -->
+  <Footer />
+
+  <!-- Modals -->
+  <Modals />
+
+  <!-- Client-side scripts -->
+  <script>
+    import '../scripts/index';
+  </script>
+</BaseLayout>
+
+<style is:global>
+  /* Mobile body padding for sticky CTA */
+  @media (max-width: 768px) {
+    body {
+      padding-bottom: 70px;
+    }
+  }
+</style>

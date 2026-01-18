@@ -1,0 +1,129 @@
+---
+/**
+ * Solution Section Component
+ * Showcases product features/capabilities
+ */
+
+import Icon from '../ui/Icon.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import { solutionFeatures } from '../../data/site';
+
+const iconMap: Record<string, 'message' | 'calendar' | 'lightbulb' | 'bell'> = {
+  message: 'message',
+  calendar: 'calendar',
+  lightbulb: 'lightbulb',
+  bell: 'bell',
+};
+---
+
+<section class="solution" id="features">
+  <SectionHeader
+    label="Rozwiązanie"
+    title="Co robi SalonMate?"
+    description="AI która rozumie branżę beauty. Odpowiada naturalnie, zna Twój cennik i umawia wizyty — bez Twojego udziału."
+  />
+  <div class="solution-grid">
+    {solutionFeatures.map((feature) => (
+      <div class="solution-card">
+        <div class="solution-icon">
+          <Icon name={iconMap[feature.icon]} size={24} />
+        </div>
+        <h3>{feature.title}</h3>
+        <p>{feature.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .solution {
+    padding: 6rem 4rem;
+    background: var(--color-cream-dark);
+  }
+
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .solution-card {
+    padding: 2rem;
+    background: white;
+    border: 1px solid rgba(166, 155, 141, 0.15);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .solution-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-soft-brown));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .solution-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(26, 24, 23, 0.1);
+  }
+
+  .solution-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .solution-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(139, 115, 85, 0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--color-accent);
+  }
+
+  .solution-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .solution-card p {
+    color: var(--color-taupe);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1024px) {
+    .solution {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .solution-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .solution {
+      padding: 4rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .solution {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

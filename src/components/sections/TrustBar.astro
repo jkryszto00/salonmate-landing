@@ -1,0 +1,74 @@
+---
+/**
+ * TrustBar Component
+ * Shows integration logos/platforms
+ */
+
+import { trustLogos } from '../../data/site';
+---
+
+<section class="trust-bar">
+  <div class="trust-bar-content">
+    <p class="trust-bar-label">Działa z narzędziami, których używasz</p>
+    <div class="trust-bar-logos">
+      {trustLogos.map((logo) => (
+        <span class="trust-bar-logo">{logo.icon} {logo.name}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    padding: 3rem 4rem;
+    background: white;
+    border-bottom: 1px solid rgba(166, 155, 141, 0.1);
+  }
+
+  .trust-bar-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .trust-bar-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-taupe);
+    margin-bottom: 1.5rem;
+  }
+
+  .trust-bar-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    opacity: 0.5;
+  }
+
+  .trust-bar-logo {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-taupe);
+  }
+
+  @media (max-width: 1024px) {
+    .trust-bar {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .trust-bar {
+      padding: 3rem 1.5rem;
+    }
+
+    .trust-bar-logos {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>

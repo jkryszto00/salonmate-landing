@@ -1,0 +1,271 @@
+---
+/**
+ * PhoneMockup Component
+ * Animated phone with chat simulation
+ */
+
+import Icon from '../ui/Icon.astro';
+---
+
+<div class="phone-mockup">
+  <div class="phone-notch"></div>
+  <div class="phone-screen">
+    <div class="phone-header">
+      <div class="phone-back">
+        <Icon name="chevron-left" size={20} />
+      </div>
+      <div class="phone-avatar">SB</div>
+      <div class="phone-info">
+        <div class="phone-name">Studio Bella</div>
+        <div class="phone-status">Odpowiada natychmiast</div>
+      </div>
+    </div>
+    <div class="phone-chat" id="chat">
+      <div class="chat-time">Dzisiaj, 21:37</div>
+    </div>
+    <div class="phone-input">
+      <div class="phone-input-field">Napisz wiadomość...</div>
+      <div class="phone-input-send">
+        <Icon name="send" size={14} />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .phone-mockup {
+    position: relative;
+    width: 300px;
+    height: 620px;
+    background: var(--color-warm-black);
+    border-radius: 44px;
+    padding: 12px;
+    box-shadow: var(--shadow-phone);
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 28px;
+    background: var(--color-warm-black);
+    border-radius: 20px;
+    z-index: 10;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 36px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-header {
+    padding: 3rem 1.25rem 1rem;
+    background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+    border-bottom: 1px solid #f0ede9;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .phone-back {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-warm-black);
+  }
+
+  .phone-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(145deg, var(--color-soft-brown), var(--color-accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+  }
+
+  .phone-info {
+    flex: 1;
+  }
+
+  .phone-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-warm-black);
+  }
+
+  .phone-status {
+    font-size: 0.75rem;
+    color: var(--color-success);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .phone-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--color-success);
+    border-radius: 50%;
+  }
+
+  .phone-chat {
+    flex: 1;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    overflow: hidden;
+    background: #fefefe;
+  }
+
+  .phone-chat :global(.chat-time) {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--color-taupe);
+    margin: 0.5rem 0;
+  }
+
+  .phone-chat :global(.chat-msg) {
+    max-width: 82%;
+    padding: 0.85rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+
+  .phone-chat :global(.chat-msg.visible) {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .phone-chat :global(.chat-msg.user) {
+    align-self: flex-end;
+    background: var(--color-warm-black);
+    color: #fff;
+    border-bottom-right-radius: 6px;
+  }
+
+  .phone-chat :global(.chat-msg.bot) {
+    align-self: flex-start;
+    background: #f5f2ee;
+    color: var(--color-warm-black);
+    border-bottom-left-radius: 6px;
+  }
+
+  .phone-chat :global(.typing-indicator) {
+    align-self: flex-start;
+    display: flex;
+    gap: 5px;
+    padding: 1rem 1.25rem;
+    background: #f5f2ee;
+    border-radius: 20px;
+    border-bottom-left-radius: 6px;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .phone-chat :global(.typing-indicator.visible) {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+  }
+
+  .phone-chat :global(.typing-indicator.hidden) {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+  }
+
+  .phone-chat :global(.typing-indicator span) {
+    width: 8px;
+    height: 8px;
+    background: var(--color-taupe);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite;
+  }
+
+  .phone-chat :global(.typing-indicator span:nth-child(2)) {
+    animation-delay: 0.15s;
+  }
+
+  .phone-chat :global(.typing-indicator span:nth-child(3)) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  .phone-input {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #f0ede9;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #fff;
+  }
+
+  .phone-input-field {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    background: #f5f2ee;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--color-taupe);
+  }
+
+  .phone-input-send {
+    width: 32px;
+    height: 32px;
+    background: var(--color-warm-black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .phone-mockup {
+      width: 260px;
+      height: 520px;
+      border-radius: 36px;
+    }
+
+    .phone-screen {
+      border-radius: 28px;
+    }
+
+    .phone-notch {
+      width: 80px;
+      height: 24px;
+      top: 14px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .phone-mockup {
+      width: 240px;
+      height: 480px;
+    }
+  }
+</style>

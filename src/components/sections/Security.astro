@@ -1,0 +1,129 @@
+---
+/**
+ * Security Section Component
+ * Trust-building security features
+ */
+
+import Icon from '../ui/Icon.astro';
+import { securityFeatures } from '../../data/site';
+
+const iconMap: Record<string, 'shield' | 'lock' | 'database' | 'trash'> = {
+  shield: 'shield',
+  lock: 'lock',
+  database: 'database',
+  trash: 'trash',
+};
+---
+
+<section class="security">
+  <div class="security-content">
+    <h2 class="security-title">Twoje dane są bezpieczne</h2>
+    <p class="security-desc">Wiemy, że dane klientek to Twój skarb. Dlatego bezpieczeństwo traktujemy poważnie.</p>
+    <div class="security-grid">
+      {securityFeatures.map((feature) => (
+        <div class="security-item">
+          <div class="security-icon">
+            <Icon name={iconMap[feature.icon]} size={22} />
+          </div>
+          <h3 class="security-item-title">{feature.title}</h3>
+          <p class="security-item-desc">{feature.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .security {
+    padding: 5rem 4rem;
+    background: var(--color-warm-black);
+    color: var(--color-cream);
+  }
+
+  .security-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .security-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .security-desc {
+    color: var(--color-taupe);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .security-item {
+    text-align: center;
+  }
+
+  .security-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--color-soft-brown);
+  }
+
+  .security-item-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .security-item-desc {
+    font-size: 0.8rem;
+    color: var(--color-taupe);
+  }
+
+  @media (max-width: 1024px) {
+    .security {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .security-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .security {
+      padding: 4rem 1.5rem;
+    }
+
+    .security-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .security {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .security-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

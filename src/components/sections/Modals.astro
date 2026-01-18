@@ -1,0 +1,257 @@
+---
+/**
+ * Modals Component
+ * Success modal and exit popup
+ */
+
+import Icon from '../ui/Icon.astro';
+import { siteConfig } from '../../data/site';
+---
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">
+      <Icon name="check" size={28} />
+    </div>
+    <h3>Dziękujemy!</h3>
+    <p>
+      Jesteś na liście. Odezwiemy się wkrótce.<br /><br />
+      <strong>Mamy prośbę:</strong> Wypełnij krótką ankietę (2 min), żebyśmy zbudowali coś idealnego dla Ciebie.
+    </p>
+    <a href={siteConfig.surveyUrl} target="_blank" class="modal-btn">Wypełnij ankietę →</a>
+    <span class="modal-skip" id="closeModal">Może później</span>
+  </div>
+</div>
+
+<!-- Exit Popup -->
+<div class="exit-popup" id="exitPopup">
+  <div class="exit-popup-content">
+    <button class="exit-popup-close" id="exitPopupClose">
+      <Icon name="x" size={18} />
+    </button>
+    <h3>Zanim wyjdziesz...</h3>
+    <p>Zostaw email i dowiedz się pierwsza, gdy wystartujemy. Bez spamu — tylko jedno powiadomienie.</p>
+    <form class="exit-popup-form" id="exitForm">
+      <input type="email" placeholder="Twój email" required />
+      <button type="submit">Zapisz</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 24, 23, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal, 1000);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+  }
+
+  .modal-overlay:global(.visible) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal {
+    background: white;
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay:global(.visible) .modal {
+    transform: translateY(0);
+  }
+
+  .modal-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(122, 155, 118, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--color-success);
+  }
+
+  .modal h3 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .modal p {
+    color: var(--color-taupe);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .modal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--color-warm-black);
+    color: var(--color-cream);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .modal-btn:hover {
+    background: var(--color-accent);
+  }
+
+  .modal-skip {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .modal-skip:hover {
+    color: var(--color-warm-black);
+  }
+
+  /* Exit popup */
+  .exit-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 24, 23, 0.8);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-exit-popup, 1001);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+  }
+
+  .exit-popup:global(.visible) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .exit-popup-content {
+    background: white;
+    padding: 3rem 2.5rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .exit-popup:global(.visible) .exit-popup-content {
+    transform: scale(1);
+  }
+
+  .exit-popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    background: var(--color-cream);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-taupe);
+    transition: all 0.3s ease;
+  }
+
+  .exit-popup-close:hover {
+    background: var(--color-warm-black);
+    color: white;
+  }
+
+  .exit-popup h3 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .exit-popup p {
+    color: var(--color-taupe);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .exit-popup-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .exit-popup-form input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid var(--color-soft-brown);
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .exit-popup-form button {
+    padding: 1rem 1.5rem;
+    background: var(--color-warm-black);
+    color: white;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .exit-popup-form button:hover {
+    background: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .modal {
+      padding: 2rem 1.5rem;
+    }
+
+    .exit-popup-content {
+      padding: 2rem 1.5rem;
+    }
+
+    .exit-popup-form {
+      flex-direction: column;
+    }
+  }
+</style>

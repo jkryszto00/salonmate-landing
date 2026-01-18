@@ -1,0 +1,141 @@
+---
+/**
+ * HowItWorks Section Component
+ * Step-by-step process explanation
+ */
+
+import SectionHeader from '../ui/SectionHeader.astro';
+import { howItWorksSteps } from '../../data/site';
+---
+
+<section class="how" id="how">
+  <div class="how-content">
+    <SectionHeader
+      label="Jak to działa"
+      title="3 kroki do wolnych wieczorów"
+    />
+    <div class="how-steps">
+      {howItWorksSteps.map((step) => (
+        <div class="step">
+          <div class="step-num">{step.number}</div>
+          <div class="step-content">
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-desc">{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how {
+    padding: 6rem 4rem;
+    background: var(--color-cream-dark);
+  }
+
+  .how-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .how-steps {
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    left: 39px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--color-soft-brown), transparent);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    position: relative;
+  }
+
+  .step-num {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 1px solid var(--color-soft-brown);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .step:hover .step-num {
+    background: var(--color-warm-black);
+    color: var(--color-cream);
+    border-color: var(--color-warm-black);
+  }
+
+  .step-content {
+    padding-top: 1rem;
+  }
+
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-desc {
+    color: var(--color-taupe);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1024px) {
+    .how {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .how {
+      padding: 4rem 1.5rem;
+    }
+
+    .step {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem 0;
+    }
+
+    .step-num {
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+    }
+
+    .how-steps::before {
+      display: none;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .how {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

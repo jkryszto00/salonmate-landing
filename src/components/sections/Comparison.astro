@@ -1,0 +1,159 @@
+---
+/**
+ * Comparison Section Component
+ * Before/after comparison showcase
+ */
+
+import SectionHeader from '../ui/SectionHeader.astro';
+import { comparisonContent } from '../../data/site';
+---
+
+<section class="comparison">
+  <div class="comparison-container">
+    <SectionHeader
+      label="Porównanie"
+      title="Ty o 23:00 vs. SalonMate"
+      centered
+    />
+    <div class="comparison-grid">
+      <div class="comparison-card before">
+        <div class="comparison-badge">Bez SalonMate</div>
+        <div class="comparison-scenario">{comparisonContent.before.scenario}</div>
+        <div class="comparison-message user">{comparisonContent.before.userMessage}</div>
+        <div class="comparison-message response">{comparisonContent.before.response}</div>
+        <div class="comparison-time">{comparisonContent.before.time}</div>
+      </div>
+      <div class="comparison-card after">
+        <div class="comparison-badge">Z SalonMate</div>
+        <div class="comparison-scenario">{comparisonContent.after.scenario}</div>
+        <div class="comparison-message user">{comparisonContent.after.userMessage}</div>
+        <div class="comparison-message response">{comparisonContent.after.response}</div>
+        <div class="comparison-time">{comparisonContent.after.time}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison {
+    padding: 6rem 4rem;
+  }
+
+  .comparison-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .comparison-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .comparison-card.before {
+    background: rgba(196, 113, 91, 0.05);
+    border: 1px solid rgba(196, 113, 91, 0.15);
+  }
+
+  .comparison-card.after {
+    background: rgba(122, 155, 118, 0.05);
+    border: 1px solid rgba(122, 155, 118, 0.2);
+  }
+
+  .comparison-badge {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+  }
+
+  .comparison-card.before .comparison-badge {
+    background: var(--color-error);
+    color: white;
+  }
+
+  .comparison-card.after .comparison-badge {
+    background: var(--color-success);
+    color: white;
+  }
+
+  .comparison-scenario {
+    font-size: 0.8rem;
+    color: var(--color-taupe);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(166, 155, 141, 0.15);
+  }
+
+  .comparison-message {
+    background: white;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .comparison-message.user {
+    background: var(--color-warm-black);
+    color: white;
+    margin-left: 1rem;
+  }
+
+  .comparison-message.response {
+    margin-right: 1rem;
+  }
+
+  .comparison-time {
+    font-size: 0.75rem;
+    color: var(--color-taupe);
+    text-align: right;
+    margin-top: 1rem;
+  }
+
+  .comparison-card.before .comparison-time {
+    color: var(--color-error);
+  }
+
+  .comparison-card.after .comparison-time {
+    color: var(--color-success);
+  }
+
+  @media (max-width: 1024px) {
+    .comparison {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .comparison-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .comparison {
+      padding: 4rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .comparison {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,56 @@
+/*
+ * SalonMate Brand Variables
+ * Centralized design tokens for consistent styling
+ */
+
+:root {
+  /* Brand Colors */
+  --color-cream: #F9F7F4;
+  --color-cream-dark: #f3efe9;
+  --color-warm-black: #1A1817;
+  --color-taupe: #A69B8D;
+  --color-soft-brown: #D4C8BB;
+  --color-accent: #8B7355;
+  --color-success: #7A9B76;
+  --color-error: #c4715b;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-section: 6rem;
+  --space-section-mobile: 4rem;
+
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-card: 0 15px 40px -10px rgba(26, 24, 23, 0.15);
+  --shadow-phone:
+    0 60px 120px -30px rgba(26, 24, 23, 0.3),
+    0 30px 60px -20px rgba(26, 24, 23, 0.2),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+
+  /* Z-index layers */
+  --z-sticky: 99;
+  --z-nav: 100;
+  --z-modal: 1000;
+  --z-exit-popup: 1001;
+}
+
+/* Tailwind CSS 4 theme extension */
+@theme {
+  --color-cream: #F9F7F4;
+  --color-cream-dark: #f3efe9;
+  --color-warm-black: #1A1817;
+  --color-taupe: #A69B8D;
+  --color-soft-brown: #D4C8BB;
+  --color-accent: #8B7355;
+  --color-success: #7A9B76;
+  --color-error: #c4715b;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+}

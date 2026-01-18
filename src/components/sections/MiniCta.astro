@@ -1,0 +1,71 @@
+---
+/**
+ * MiniCta Component
+ * Small call-to-action sections between content
+ */
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  href?: string;
+}
+
+const { title, description, buttonText, href = '#waitlist' } = Astro.props;
+---
+
+<section class="mini-cta">
+  <div class="mini-cta-content">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <a href={href} class="mini-cta-btn">{buttonText} →</a>
+  </div>
+</section>
+
+<style>
+  .mini-cta {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: var(--color-cream-dark);
+  }
+
+  .mini-cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .mini-cta h3 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .mini-cta p {
+    color: var(--color-taupe);
+    margin-bottom: 1.5rem;
+  }
+
+  .mini-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--color-warm-black);
+    color: var(--color-cream);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+
+  .mini-cta-btn:hover {
+    background: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .mini-cta {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>

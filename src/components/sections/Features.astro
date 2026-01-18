@@ -1,0 +1,99 @@
+---
+/**
+ * Features Section Component
+ * Additional feature cards grid
+ */
+
+import SectionHeader from '../ui/SectionHeader.astro';
+import { additionalFeatures } from '../../data/site';
+---
+
+<section class="features">
+  <SectionHeader
+    label="Szczegóły"
+    title="Co jeszcze potrafi?"
+  />
+  <div class="features-grid">
+    {additionalFeatures.map((feature) => (
+      <div class="feature-card">
+        <div class="feature-number">{feature.number}</div>
+        <h3 class="feature-title">{feature.title}</h3>
+        <p class="feature-desc">{feature.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 6rem 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .feature-card {
+    padding: 1.75rem;
+    border: 1px solid rgba(166, 155, 141, 0.15);
+    background: white;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .feature-number {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--color-soft-brown);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1024px) {
+    .features {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features {
+      padding: 4rem 1.5rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .features {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+</style>
