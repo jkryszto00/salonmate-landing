@@ -250,7 +250,10 @@ import { heroContent } from '../../data/site';
     .hero-visual {
       order: 1;
       height: auto;
-      padding: 2rem 0 0;
+      padding: 1rem 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .floating-card {
@@ -260,16 +263,22 @@ import { heroContent } from '../../data/site';
 
   @media (max-width: 768px) {
     .hero {
-      padding-top: 6rem;
+      padding-top: 5rem;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
+      gap: 1.5rem;
     }
 
     .hero-title .line {
       display: inline;
     }
 
+    .hero-visual {
+      padding: 0.5rem 0 0;
+    }
+
     .hero-cta-group {
+      padding-bottom: 1rem;
       flex-direction: column;
       gap: 1rem;
     }
@@ -280,10 +289,50 @@ import { heroContent } from '../../data/site';
     }
   }
 
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: 4.5rem;
+      gap: 1rem;
+    }
+
+    .hero-visual {
+      padding: 0;
+    }
+
+    .hero-badge {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-benefits {
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-benefit {
+      font-size: 0.875rem;
+    }
+  }
+
   @media (max-width: 380px) {
     .hero {
       padding-left: 1rem;
       padding-right: 1rem;
+      padding-top: 4rem;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .hero-desc {
+      font-size: 0.9rem;
     }
   }
 </style>

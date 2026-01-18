@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,6 +22,19 @@ body {
   color: var(--color-warm-black);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Prevent overflow from breaking layout */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Word break for long text */
+p, h1, h2, h3, h4, h5, h6, li, span {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Animations */

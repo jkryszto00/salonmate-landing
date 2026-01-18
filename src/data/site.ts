@@ -7,6 +7,13 @@ export const siteConfig = {
   surveyUrl: 'https://app.youform.com/forms/1ofucpes',
 };
 
+// Analytics & Tracking IDs (from environment variables)
+export const analyticsConfig = {
+  googleAnalytics: import.meta.env.PUBLIC_GA_ID || '',
+  facebookPixel: import.meta.env.PUBLIC_FB_PIXEL_ID || '',
+  microsoftClarity: import.meta.env.PUBLIC_CLARITY_ID || '',
+};
+
 export const navLinks = [
   { href: '#features', label: 'Funkcje' },
   { href: '#pricing', label: 'Cennik' },
@@ -31,11 +38,31 @@ export const heroContent = {
 };
 
 export const trustLogos = [
-  { icon: '📱', name: 'Instagram' },
-  { icon: '💬', name: 'Messenger' },
-  { icon: '📅', name: 'Booksy' },
-  { icon: '✨', name: 'Fresha' },
-  { icon: '📆', name: 'Google Calendar' },
+  {
+    name: 'Instagram',
+    description: 'DM-y i komentarze',
+    color: '#E4405F',
+  },
+  {
+    name: 'Messenger',
+    description: 'Wiadomości i komentarze',
+    color: '#0084FF',
+  },
+  {
+    name: 'Booksy',
+    description: 'Kalendarz i rezerwacje',
+    color: '#00B67A',
+  },
+  {
+    name: 'Fresha',
+    description: 'Kalendarz i rezerwacje',
+    color: '#7B68EE',
+  },
+  {
+    name: 'Google Calendar',
+    description: 'Synchronizacja',
+    color: '#4285F4',
+  },
 ] as const;
 
 export const problemContent = {

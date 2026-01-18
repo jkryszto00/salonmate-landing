@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { siteConfig, analyticsConfig } from '../data/site';
 
 interface Props {
   title?: string;
@@ -10,10 +11,10 @@ interface Props {
 const {
   title = 'SalonMate — AI Recepcjonistka dla Twojego Salonu',
   description = 'AI recepcjonistka, która odpowiada na wiadomości, umawia wizyty przez DM i zna Twój salon. Działa 24/7, nawet kiedy Ty odpoczywasz.',
-  ogImage = 'https://salonmate.ai/og-image.jpg',
+  ogImage = `${siteConfig.url}/og-image.jpg`,
 } = Astro.props;
 
-const siteUrl = 'https://salonmate.ai';
+const { googleAnalytics, facebookPixel, microsoftClarity } = analyticsConfig;
 ---
 
 <!doctype html>
@@ -29,7 +30,7 @@ const siteUrl = 'https://salonmate.ai';
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
+    <meta property="og:url" content={siteConfig.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content="Odpowiada na DM-y 24/7, umawia wizyty, zna Twój cennik. Dołącz do waitlisty i przetestuj za darmo." />
     <meta property="og:image" content={ogImage} />
@@ -43,21 +44,56 @@ const siteUrl = 'https://salonmate.ai';
 
     <meta name="generator" content={Astro.generator} />
 
-    <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-SSKLZEPN0K"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <!-- Google Analytics (via Partytown) -->
+    {googleAnalytics && (
+      <>
+        <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}></script>
+        <script type="text/partytown" set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('consent', 'default', {
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            analytics_storage: 'denied',
+          });
+          gtag('config', '${googleAnalytics}');
+        `} />
+      </>
+    )}
 
-      gtag("consent", "default", {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        analytics_storage: "denied",
-      });
+    <!-- Facebook Pixel (via Partytown) -->
+    {facebookPixel && (
+      <>
+        <script type="text/partytown" set:html={`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '${facebookPixel}');
+          fbq('track', 'PageView');
+        `} />
+        <noscript>
+          <img height="1" width="1" style="display:none" src={`https://www.facebook.com/tr?id=${facebookPixel}&ev=PageView&noscript=1`} />
+        </noscript>
+      </>
+    )}
 
-      gtag('config', 'G-SSKLZEPN0K');
-    </script>
+    <!-- Microsoft Clarity (via Partytown) -->
+    {microsoftClarity && (
+      <script type="text/partytown" set:html={`
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "${microsoftClarity}");
+      `} />
+    )}
   </head>
   <body>
     <slot />

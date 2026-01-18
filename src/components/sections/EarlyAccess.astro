@@ -1,0 +1,173 @@
+---
+/**
+ * EarlyAccess Section Component
+ * Highlights early access benefits for waitlist
+ */
+
+import Icon from '../ui/Icon.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+
+const benefits = [
+  {
+    icon: 'check' as const,
+    title: '14 dni za darmo',
+    desc: 'Pełny dostęp do wszystkich funkcji bez zobowiązań',
+  },
+  {
+    icon: 'check' as const,
+    title: '50% zniżki na start',
+    desc: 'Dla pierwszych 100 użytkowniczek z waitlisty',
+  },
+  {
+    icon: 'check' as const,
+    title: 'Wpływ na rozwój',
+    desc: 'Twoje sugestie pomogą nam budować lepszy produkt',
+  },
+  {
+    icon: 'check' as const,
+    title: 'Priorytetowe wsparcie',
+    desc: 'Bezpośredni kontakt z zespołem przez cały okres testów',
+  },
+];
+---
+
+<section class="early-access" id="early-access">
+  <div class="early-access-content">
+    <SectionHeader
+      label="Early Access"
+      title="Co zyskujesz dołączając teraz?"
+      description="Pierwsze użytkowniczki mają szczególne przywileje. Dołącz do waitlisty i przetestuj SalonMate przed innymi."
+      centered
+    />
+    <div class="benefits-grid">
+      {benefits.map((benefit) => (
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <Icon name={benefit.icon} size={20} />
+          </div>
+          <div class="benefit-content">
+            <h3>{benefit.title}</h3>
+            <p>{benefit.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="early-access-cta">
+      <a href="#waitlist" class="cta-btn">Dołącz do waitlisty →</a>
+      <p class="cta-note">Bez zobowiązań. Odezwiemy się gdy wystartujemy.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .early-access {
+    padding: 6rem 4rem;
+    background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
+  }
+
+  .early-access-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .benefit-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid rgba(166, 155, 141, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(122, 155, 118, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-success);
+    flex-shrink: 0;
+  }
+
+  .benefit-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .benefit-content p {
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+    line-height: 1.5;
+  }
+
+  .early-access-cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--color-warm-black);
+    color: var(--color-cream);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+
+  .cta-btn:hover {
+    background: var(--color-accent);
+  }
+
+  .cta-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+  }
+
+  @media (max-width: 768px) {
+    .early-access {
+      padding: 4rem 1.5rem;
+    }
+
+    .benefits-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .benefit-card {
+      padding: 1.25rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .early-access {
+      padding: 3rem 1rem;
+    }
+
+    .benefit-card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .benefit-icon {
+      margin: 0 auto;
+    }
+  }
+</style>

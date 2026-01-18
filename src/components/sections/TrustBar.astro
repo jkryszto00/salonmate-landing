@@ -1,74 +1,290 @@
 ---
 /**
  * TrustBar Component
- * Shows integration logos/platforms
+ * Shows integrations with visual cards
  */
 
 import { trustLogos } from '../../data/site';
+
+// SVG icons for each platform
+const icons: Record<string, string> = {
+  Instagram: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  Messenger: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.15.26.37.26.59l.01 1.85c0 .53.55.88 1.03.66l2.07-.91c.18-.08.38-.09.57-.04.91.25 1.88.38 2.92.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm1.07 13.07l-2.54-2.72-4.97 2.72 5.47-5.81 2.6 2.72 4.91-2.72-5.47 5.81z"/></svg>`,
+  Booksy: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>`,
+  Fresha: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/></svg>`,
+  'Google Calendar': `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm-7-9c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>`,
+};
 ---
 
-<section class="trust-bar">
-  <div class="trust-bar-content">
-    <p class="trust-bar-label">Działa z narzędziami, których używasz</p>
-    <div class="trust-bar-logos">
-      {trustLogos.map((logo) => (
-        <span class="trust-bar-logo">{logo.icon} {logo.name}</span>
+<section class="integrations">
+  <div class="integrations-content">
+    <div class="integrations-header">
+      <span class="integrations-badge">Integracje</span>
+      <h2 class="integrations-title">Działa z narzędziami, których używasz</h2>
+      <p class="integrations-desc">Podłącz w 5 minut. Bez wiedzy technicznej.</p>
+    </div>
+
+    <div class="integrations-grid">
+      {trustLogos.map((item) => (
+        <div class="integration-card" style={`--accent: ${item.color}`}>
+          <div class="integration-icon">
+            <Fragment set:html={icons[item.name]} />
+          </div>
+          <div class="integration-info">
+            <span class="integration-name">{item.name}</span>
+            <span class="integration-desc">{item.description}</span>
+          </div>
+          <div class="integration-status">
+            <span class="status-dot"></span>
+          </div>
+        </div>
       ))}
     </div>
+
+    <p class="integrations-note">
+      <span class="note-icon">+</span>
+      Więcej integracji wkrótce
+    </p>
   </div>
 </section>
 
 <style>
-  .trust-bar {
-    padding: 3rem 4rem;
-    background: white;
-    border-bottom: 1px solid rgba(166, 155, 141, 0.1);
+  .integrations {
+    padding: 5rem 4rem;
+    background: linear-gradient(180deg, white 0%, var(--color-cream) 100%);
   }
 
-  .trust-bar-content {
-    max-width: 900px;
+  .integrations-content {
+    max-width: 1000px;
     margin: 0 auto;
+  }
+
+  .integrations-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .integrations-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(139, 115, 85, 0.1);
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .integrations-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .integrations-desc {
+    color: var(--color-taupe);
+    font-size: 1rem;
+  }
+
+  .integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+
+  .integration-card {
+    background: white;
+    border: 1px solid rgba(166, 155, 141, 0.15);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .integration-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(26, 24, 23, 0.08);
+    border-color: var(--accent);
+  }
+
+  .integration-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    transition: all 0.3s ease;
+  }
+
+  .integration-icon :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .integration-card:hover .integration-icon {
+    background: var(--accent);
+    color: white;
+  }
+
+  .integration-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
     text-align: center;
   }
 
-  .trust-bar-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-taupe);
-    margin-bottom: 1.5rem;
-  }
-
-  .trust-bar-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-    opacity: 0.5;
-  }
-
-  .trust-bar-logo {
+  .integration-name {
+    font-weight: 600;
     font-size: 0.9rem;
-    font-weight: 500;
+    color: var(--color-warm-black);
+  }
+
+  .integration-desc {
+    font-size: 0.75rem;
     color: var(--color-taupe);
+  }
+
+  .integration-status {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .status-dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--color-success);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .integration-card:hover .status-dot {
+    opacity: 1;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .integrations-note {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--color-taupe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .note-icon {
+    width: 20px;
+    height: 20px;
+    background: rgba(139, 115, 85, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    font-weight: 600;
   }
 
   @media (max-width: 1024px) {
-    .trust-bar {
-      padding-left: 2rem;
-      padding-right: 2rem;
+    .integrations {
+      padding: 4rem 2rem;
+    }
+
+    .integrations-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (max-width: 768px) {
-    .trust-bar {
+    .integrations {
       padding: 3rem 1.5rem;
     }
 
-    .trust-bar-logos {
-      flex-direction: column;
-      gap: 1rem;
+    .integrations-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .integration-card {
+      padding: 1.25rem 0.75rem;
+    }
+
+    .integration-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .integration-icon :global(svg) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .integrations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .integration-card {
+      padding: 1rem 0.5rem;
+      border-radius: 12px;
+    }
+
+    .integration-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+
+    .integration-name {
+      font-size: 0.8rem;
+    }
+
+    .integration-desc {
+      font-size: 0.7rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .integrations {
+      padding: 2.5rem 1rem;
+    }
+
+    .integrations-header {
+      margin-bottom: 2rem;
+    }
+
+    .integrations-title {
+      font-size: 1.35rem;
+    }
+
+    .integrations-desc {
+      font-size: 0.9rem;
     }
   }
 </style>

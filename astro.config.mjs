@@ -14,5 +14,11 @@ export default defineConfig({
   },
 
   adapter: cloudflare(),
-  integrations: [partytown({ config: { forward: ['dataLayer.push'] } })]
+  integrations: [
+    partytown({
+      config: {
+        forward: ['dataLayer.push', 'fbq', 'clarity'],
+      },
+    }),
+  ]
 });

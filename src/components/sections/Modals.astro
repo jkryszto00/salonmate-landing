@@ -224,6 +224,7 @@ import { siteConfig } from '../../data/site';
     font-family: inherit;
     font-size: 1rem;
     outline: none;
+    min-width: 0;
   }
 
   .exit-popup-form button {
@@ -252,6 +253,29 @@ import { siteConfig } from '../../data/site';
 
     .exit-popup-form {
       flex-direction: column;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .modal-overlay,
+    .exit-popup {
+      padding: 1rem;
+    }
+
+    .modal {
+      padding: 1.5rem 1rem;
+    }
+
+    .modal h3 {
+      font-size: 1.5rem;
+    }
+
+    .exit-popup-content {
+      padding: 1.5rem 1rem;
+    }
+
+    .exit-popup h3 {
+      font-size: 1.5rem;
     }
   }
 </style>
