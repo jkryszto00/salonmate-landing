@@ -120,6 +120,22 @@ function hideModal(modalId: string): void {
   modal?.classList.remove('visible');
 }
 
+function replaceFormWithSuccess(form: HTMLFormElement): void {
+  const successHtml = `
+    <div class="form-success">
+      <div class="form-success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <h3>Dziękujemy!</h3>
+      <p>Jesteś na liście. Powiadomimy Cię gdy wystartujemy.</p>
+    </div>
+  `;
+  form.outerHTML = successHtml;
+}
+
 function initTurnstile(): void {
   const siteKey = window.TURNSTILE_SITE_KEY;
   if (!siteKey || !window.turnstile) return;
@@ -226,18 +242,19 @@ export function initForms(): void {
       if (response.ok) {
         hasSubmitted = true;
         lastSubmitTime = now;
+        replaceFormWithSuccess(waitlistForm);
         showModal('successModal');
-        waitlistForm.reset();
-        resetTurnstile(waitlistTurnstileId);
       } else {
         const data = await response.json().catch(() => ({}));
         showError(emailInput, data.error || 'Wystąpił błąd. Spróbuj ponownie.');
         resetTurnstile(waitlistTurnstileId);
+        isSubmitting = false;
+        button.disabled = false;
+        button.textContent = 'Dołączam do listy';
       }
     } catch {
       showError(emailInput, 'Błąd połączenia. Sprawdź internet i spróbuj ponownie.');
       resetTurnstile(waitlistTurnstileId);
-    } finally {
       isSubmitting = false;
       button.disabled = false;
       button.textContent = 'Dołączam do listy';
@@ -339,18 +356,20 @@ export function initForms(): void {
       if (response.ok) {
         hasSubmitted = true;
         lastSubmitTime = now;
-        hideModal('exitPopup');
-        showModal('successModal');
-        resetTurnstile(exitTurnstileId);
+        replaceFormWithSuccess(exitForm);
+        // Close popup after showing success
+        setTimeout(() => hideModal('exitPopup'), 2500);
       } else {
         const data = await response.json().catch(() => ({}));
         showError(emailInput, data.error || 'Wystąpił błąd. Spróbuj ponownie.');
         resetTurnstile(exitTurnstileId);
+        isSubmitting = false;
+        button.disabled = false;
+        button.textContent = 'Powiadom mnie';
       }
     } catch {
       showError(emailInput, 'Błąd połączenia. Sprawdź internet i spróbuj ponownie.');
       resetTurnstile(exitTurnstileId);
-    } finally {
       isSubmitting = false;
       button.disabled = false;
       button.textContent = 'Powiadom mnie';

@@ -129,11 +129,24 @@ export const POST: APIRoute = async ({ request }) => {
 
     const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-    await resend.contacts.create({
+    const result = await resend.contacts.create({
       audienceId: import.meta.env.RESEND_AUDIENCE_ID,
       email: cleanEmail,
       firstName: cleanName,
     });
+
+    // Check if contact already exists (Resend returns error for duplicates)
+    if (result.error) {
+      // "Contact already exists" or similar
+      if (result.error.message?.toLowerCase().includes('already') ||
+          result.error.message?.toLowerCase().includes('exist')) {
+        return new Response(
+          JSON.stringify({ error: 'Ten email jest już na liście. Powiadomimy Cię gdy wystartujemy!' }),
+          { status: 409, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      throw new Error(result.error.message);
+    }
 
     return new Response(
       JSON.stringify({ success: true }),
@@ -142,7 +155,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     console.error('Waitlist error:', error);
     return new Response(
-      JSON.stringify({ error: 'Wystąpił błąd' }),
+      JSON.stringify({ error: 'Wystąpił błąd. Spróbuj ponownie.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

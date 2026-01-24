@@ -85,18 +85,15 @@
     color: var(--color-cream);
     padding: 1.25rem 2rem;
     z-index: 9999;
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
+    display: none;
   }
 
-  @media (max-width: 768px) {
-    .cookie-consent {
-      bottom: 70px; /* Above mobile sticky CTA */
-    }
+  .cookie-consent:global(.visible) {
+    display: block;
   }
 
-  .cookie-consent.visible {
-    transform: translateY(0);
+  .cookie-consent:global(.hidden) {
+    display: none !important;
   }
 
   .cookie-content {
@@ -188,7 +185,7 @@
     transition: all 0.3s ease;
   }
 
-  .cookie-modal-overlay.visible {
+  .cookie-modal-overlay:global(.visible) {
     opacity: 1;
     visibility: visible;
   }
@@ -203,7 +200,7 @@
     transition: transform 0.3s ease;
   }
 
-  .cookie-modal-overlay.visible .cookie-modal {
+  .cookie-modal-overlay:global(.visible) .cookie-modal {
     transform: translateY(0);
   }
 
@@ -450,6 +447,7 @@
 
     function hideBanner() {
       banner.classList.remove('visible');
+      banner.classList.add('hidden');
     }
 
     function hideModal() {
