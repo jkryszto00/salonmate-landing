@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/sections/Nav.astro';
+import Footer from '../components/sections/Footer.astro';
+import { siteConfig } from '../data/site';
+---
+
+<BaseLayout title="Polityka Prywatności — SalonMate">
+  <Nav />
+
+  <main class="privacy-page">
+    <div class="privacy-content">
+      <h1>Polityka Prywatności</h1>
+      <p class="last-updated">Ostatnia aktualizacja: styczeń 2025</p>
+
+      <section>
+        <h2>1. Administrator danych</h2>
+        <p>
+          Administratorem Twoich danych osobowych jest SalonMate z siedzibą w Polsce.
+          Kontakt: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Jakie dane zbieramy</h2>
+        <p>Zbieramy tylko dane, które nam podajesz:</p>
+        <ul>
+          <li><strong>Imię</strong> — żebyśmy mogli się do Ciebie zwracać</li>
+          <li><strong>Adres email</strong> — żebyśmy mogli Cię powiadomić o starcie produktu</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. W jakim celu przetwarzamy dane</h2>
+        <ul>
+          <li>Prowadzenie listy oczekujących (waitlisty)</li>
+          <li>Powiadomienie Cię gdy wystartujemy</li>
+          <li>Kontakt w sprawie ankiety lub feedbacku (jeśli się zgodzisz)</li>
+        </ul>
+        <p>
+          <strong>Nie wysyłamy spamu.</strong> Odezwiemy się tylko gdy będziemy mieli coś ważnego do przekazania.
+        </p>
+      </section>
+
+      <section>
+        <h2>4. Podstawa prawna</h2>
+        <ul>
+          <li><strong>Art. 6 ust. 1 lit. a RODO</strong> — Twoja zgoda (zapisujesz się dobrowolnie)</li>
+          <li><strong>Art. 6 ust. 1 lit. f RODO</strong> — nasz uzasadniony interes (analityka strony)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. Cookies i narzędzia analityczne</h2>
+        <p>Używamy cookies i narzędzi analitycznych tylko po Twojej zgodzie:</p>
+        <ul>
+          <li><strong>Google Analytics 4</strong> — analiza ruchu na stronie</li>
+          <li><strong>Microsoft Clarity</strong> — analiza zachowań użytkowników</li>
+          <li><strong>Facebook Pixel</strong> — mierzenie skuteczności reklam</li>
+        </ul>
+        <p>
+          Możesz zarządzać zgodami w bannerze cookie lub usunąć cookies z przeglądarki w dowolnym momencie.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. Jak długo przechowujemy dane</h2>
+        <ul>
+          <li><strong>Dane z waitlisty</strong> — do momentu startu produktu i zakończenia kontaktu, lub do wycofania zgody</li>
+          <li><strong>Dane analityczne</strong> — zgodnie z politykami Google, Microsoft i Meta (zazwyczaj 14-26 miesięcy)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>7. Twoje prawa</h2>
+        <p>Masz prawo do:</p>
+        <ul>
+          <li><strong>Dostępu</strong> — możesz zapytać jakie dane o Tobie mamy</li>
+          <li><strong>Sprostowania</strong> — możesz poprosić o poprawienie danych</li>
+          <li><strong>Usunięcia</strong> — możesz zażądać usunięcia swoich danych</li>
+          <li><strong>Wycofania zgody</strong> — w każdej chwili, bez podawania przyczyny</li>
+          <li><strong>Skargi</strong> — do Prezesa UODO, jeśli uważasz że naruszamy przepisy</li>
+        </ul>
+        <p>
+          Żeby skorzystać z tych praw, napisz do nas: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>8. Bezpieczeństwo</h2>
+        <p>
+          Twoje dane są bezpieczne. Używamy szyfrowania SSL, przechowujemy dane na serwerach w Unii Europejskiej
+          i ograniczamy dostęp tylko do osób, które go potrzebują.
+        </p>
+      </section>
+
+      <section>
+        <h2>9. Zmiany w polityce</h2>
+        <p>
+          Możemy aktualizować tę politykę. O istotnych zmianach poinformujemy emailem
+          (jeśli jesteś na waitliście) lub przez informację na stronie.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Kontakt</h2>
+        <p>
+          Masz pytania? Napisz: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </p>
+      </section>
+
+      <div class="back-link">
+        <a href="/">← Wróć na stronę główną</a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    padding: 8rem 2rem 4rem;
+    min-height: 100vh;
+    background: var(--color-cream);
+  }
+
+  .privacy-content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .last-updated {
+    color: var(--color-taupe);
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-warm-black);
+  }
+
+  p {
+    color: var(--color-warm-black);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+
+  li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.7;
+    color: var(--color-warm-black);
+  }
+
+  li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: var(--color-warm-black);
+  }
+
+  .back-link {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(166, 155, 141, 0.2);
+  }
+
+  .back-link a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .privacy-page {
+      padding: 6rem 1.5rem 3rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .privacy-page {
+      padding: 5rem 1rem 2rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+    }
+  }
+</style>

@@ -142,3 +142,45 @@ input, button, textarea, select {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* Form validation styles */
+.input-error {
+  border-color: #dc2626 !important;
+  background-color: #fef2f2 !important;
+}
+
+.input-error:focus {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-error {
+  display: block;
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  text-align: center;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.input-error {
+  animation: shake 0.4s ease;
+}
+
+/* Cloudflare Turnstile widget */
+.cf-turnstile {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.cf-turnstile iframe {
+  max-width: 100%;
+}

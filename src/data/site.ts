@@ -2,8 +2,8 @@
 
 export const siteConfig = {
   name: 'SalonMate',
-  url: 'https://salonmate.ai',
-  email: 'hej@salonmate.ai',
+  url: 'https://salonmate.pl',
+  email: 'hej@salonmate.pl',
   surveyUrl: 'https://app.youform.com/forms/1ofucpes',
 };
 
@@ -14,27 +14,31 @@ export const analyticsConfig = {
   microsoftClarity: import.meta.env.PUBLIC_CLARITY_ID || '',
 };
 
+// Cloudflare Turnstile (anti-bot)
+export const turnstileConfig = {
+  siteKey: import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '',
+};
+
 export const navLinks = [
-  { href: '#features', label: 'Funkcje' },
-  { href: '#pricing', label: 'Cennik' },
-  { href: '#faq', label: 'FAQ' },
+  { href: '/#features', label: 'Funkcje' },
+  { href: '/#faq', label: 'FAQ' },
 ] as const;
 
 export const heroContent = {
-  badge: 'Startujemy wkrótce',
+  badge: 'Budujemy z Wami',
   title: {
     line1: 'Przestań odpisywać',
     line2: 'na DM-y',
     line3: 'do północy',
   },
-  description: 'AI recepcjonistka, która odpowiada na wiadomości, umawia wizyty przez Instagram i zna Twój salon lepiej niż ktokolwiek.',
+  description: 'Tworzymy AI recepcjonistkę dla salonów beauty. Odpowiada w 8 sekund, umawia wizyty przez Instagram. Chcemy to zbudować razem z Tobą.',
   benefits: [
-    'Odpowiada na wiadomości 24/7',
-    'Umawia wizyty przez DM',
-    'Zna Twój cennik i usługi',
+    'Odpowiedź w 8 sekund zamiast 4 godzin',
+    'Rezerwacje bez wychodzenia z Instagrama',
+    'Integracja z Booksy, Fresha i Google Calendar',
   ],
-  ctaText: 'Zapisz się na listę',
-  ctaNote: 'Darmowy test dla pierwszych użytkowniczek',
+  ctaText: 'Chcę przetestować pierwsza',
+  ctaNote: 'Darmowy dostęp + wpływ na rozwój produktu',
 };
 
 export const trustLogos = [
@@ -66,18 +70,18 @@ export const trustLogos = [
 ] as const;
 
 export const problemContent = {
-  title: 'Prowadzisz salon i zamiast odpoczywać wieczorem, odpisujesz na te same pytania?',
-  description: '„Ile kosztuje balayage?" „Macie coś w sobotę?" „A można dziś?" Codziennie to samo. A Ty chcesz po prostu zjeść kolację w spokoju.',
+  title: 'Znowu 22:00 i 14 nieprzeczytanych wiadomości na Instagramie?',
+  description: '„Ile kosztuje balayage?" „Macie coś w sobotę?" „A można dziś?" Te same pytania. Każdego dnia. A Ty tylko chcesz obejrzeć serial bez telefonu w ręku.',
   painPoints: [
-    'Odpowiadasz na te same pytania 10+ razy dziennie',
-    'Klientki idą do konkurencji bo nie odpisałaś wystarczająco szybko',
-    'Wieczory i weekendy spędzasz z telefonem w ręku',
-    'Recepcjonistka to 4-5 tys. zł miesięcznie',
+    'Te same pytania 10-15 razy dziennie — a Ty odpowiadasz ręcznie',
+    '23% klientek rezerwuje u konkurencji, bo nie odpisałaś w godzinę',
+    'Niedzielne popołudnie? Ty dalej odpisujesz na DM-y',
+    'Recepcjonistka = 4-5 tys. zł/mies. SalonMate = od 199 zł',
   ],
   stats: [
-    { title: 'Średni czas odpowiedzi', badge: 'Typowy salon', value: '4.5h', desc: 'Tyle czeka klientka na odpowiedź' },
-    { title: 'Utracone rezerwacje', badge: 'Badania', value: '23%', desc: 'Klientek rezygnuje bez szybkiej odpowiedzi' },
-    { title: 'Czas na odpowiedzi', badge: 'Dziennie', value: '2-3h', desc: 'Głównie wieczorami i w weekendy' },
+    { title: 'Średni czas odpowiedzi', badge: 'Typowy salon', value: '4.5h', desc: 'Po 4h klientka już jest u konkurencji' },
+    { title: 'Utracone rezerwacje', badge: 'Twarde dane', value: '23%', desc: 'Tylu tracisz przez wolną odpowiedź' },
+    { title: 'Czas na odpowiedzi', badge: 'Codziennie', value: '2-3h', desc: 'Głównie po 21:00 i w weekendy' },
   ],
 };
 
@@ -107,23 +111,23 @@ export const forWhoContent = {
 export const solutionFeatures = [
   {
     icon: 'message',
-    title: 'Odpowiada na DM-y',
-    description: 'Naturalne odpowiedzi na Instagramie i Facebooku. W Twoim stylu — jakbyś pisała sama.',
+    title: 'Błyskawiczne odpowiedzi',
+    description: 'AI odpowiada na DM-y 24/7 — w Twoim stylu. Klientka dostaje odpowiedź, Ty nie pracujesz wieczorami.',
   },
   {
     icon: 'calendar',
-    title: 'Umawia wizyty',
-    description: 'Sprawdza kalendarz, proponuje terminy, finalizuje rezerwację. Klientka nie wychodzi z apki.',
+    title: 'Automatyczne rezerwacje',
+    description: 'Sprawdza kalendarz, proponuje terminy, finalizuje wizytę. Wszystko w konwersacji na Instagramie.',
   },
   {
     icon: 'lightbulb',
     title: 'Zna Twój salon',
-    description: 'Cennik, usługi, dostępność — odpowiada na wszystko jak doświadczona recepcjonistka.',
+    description: 'Cennik, usługi, zasady — AI odpowiada na wszystko. Uczysz ją raz, pamięta na zawsze.',
   },
   {
     icon: 'bell',
-    title: 'Powiadamia Cię',
-    description: 'Przekazuje trudne sprawy do Ciebie. Reklamacje, VIP-y — dostajesz powiadomienie.',
+    title: 'Przekazuje trudne sprawy',
+    description: 'Reklamacje, VIP-y, nietypowe pytania — dostajesz powiadomienie. AI wie, kiedy się wycofać.',
   },
 ] as const;
 
@@ -220,24 +224,28 @@ export const pricingPlans = [
 
 export const faqItems = [
   {
+    question: 'Kiedy mogę zacząć korzystać?',
+    answer: 'Zbieramy grupę pierwszych testerek. Gdy wystartujemy — powiadomimy Cię mailem. Jeśli wypełnisz ankietę, dostaniesz dostęp w pierwszej kolejności.',
+  },
+  {
     question: 'Czy klientki zorientują się, że to AI?',
-    answer: 'Większość nie. Odpowiedzi są naturalne i w Twoim stylu. Jeśli ktoś zapyta wprost, AI powie prawdę.',
+    answer: 'Projektujemy odpowiedzi tak, żeby brzmiały naturalnie — w Twoim stylu, z Twoimi emoji. Jeśli ktoś zapyta wprost, AI powie prawdę.',
   },
   {
     question: 'Co jeśli AI powie coś głupiego?',
-    answer: 'AI odpowiada tylko na podstawie informacji które jej dasz. Nie wymyśla cen ani usług. Gdy nie wie — przekazuje do Ciebie.',
+    answer: 'AI odpowiada TYLKO na podstawie informacji które jej dasz. Nie wymyśla cen. Nie obiecuje rzeczy których nie oferujesz. Gdy nie wie — przekazuje do Ciebie.',
   },
   {
-    question: 'Jak działa z Booksy/Fresha?',
-    answer: 'Łączymy się przez Google Calendar który te apki obsługują. AI widzi wolne terminy i tworzy rezerwacje bez konfliktu.',
+    question: 'Jak to będzie działać z Booksy/Fresha?',
+    answer: 'Planujemy integrację przez Google Calendar. AI zobaczy wolne terminy i utworzy rezerwację automatycznie. Dokładne szczegóły wypracujemy z testerkami.',
   },
   {
-    question: 'Mogę przetestować przed zakupem?',
-    answer: 'Tak! 14 dni za darmo, bez karty. Zapisz się na waitlistę — odezwiemy się gdy wystartujemy.',
+    question: 'Ile to będzie kosztować?',
+    answer: 'Ceny planujemy od 199 zł/mies. Ale dla osób z wczesnego dostępu — specjalne warunki na stałe. Pierwsze testerki testują za darmo.',
   },
   {
-    question: 'A co z bezpieczeństwem danych?',
-    answer: 'Szyfrowanie, serwery w EU, zgodność z RODO. Nie sprzedajemy danych. Możesz je usunąć w każdej chwili.',
+    question: 'Dlaczego warto dołączyć teraz?',
+    answer: 'Budujesz z nami produkt. Twój feedback = funkcje których potrzebujesz. Plus najlepsze ceny i priorytetowy dostęp.',
   },
 ] as const;
 
@@ -250,15 +258,14 @@ export const chatConversation = [
 
 export const footerLinks = {
   product: [
-    { href: '#features', label: 'Funkcje' },
-    { href: '#pricing', label: 'Cennik' },
-    { href: '#faq', label: 'FAQ' },
+    { href: '/#features', label: 'Funkcje' },
+    { href: '/#faq', label: 'FAQ' },
+    { href: '/#waitlist', label: 'Dołącz do listy' },
   ],
   contact: [
-    { href: 'mailto:hej@salonmate.ai', label: 'hej@salonmate.ai' },
+    { href: 'mailto:hej@salonmate.pl', label: 'hej@salonmate.pl' },
   ],
   legal: [
-    { href: '#', label: 'Polityka prywatności' },
-    { href: '#', label: 'Regulamin' },
+    { href: '/polityka-prywatnosci', label: 'Polityka prywatności' },
   ],
 };

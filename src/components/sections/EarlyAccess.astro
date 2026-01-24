@@ -10,23 +10,23 @@ import SectionHeader from '../ui/SectionHeader.astro';
 const benefits = [
   {
     icon: 'check' as const,
-    title: '14 dni za darmo',
-    desc: 'Pełny dostęp do wszystkich funkcji bez zobowiązań',
+    title: 'Darmowy dostęp na start',
+    desc: 'Pierwsze testerki korzystają za darmo. Zero ryzyka.',
   },
   {
     icon: 'check' as const,
-    title: '50% zniżki na start',
-    desc: 'Dla pierwszych 100 użytkowniczek z waitlisty',
+    title: 'Specjalne warunki na zawsze',
+    desc: 'Dla osób z wczesnego dostępu najlepsze ceny — na stałe.',
   },
   {
     icon: 'check' as const,
-    title: 'Wpływ na rozwój',
-    desc: 'Twoje sugestie pomogą nam budować lepszy produkt',
+    title: 'Współtworzysz produkt',
+    desc: 'Twój feedback = funkcje które naprawdę potrzebujesz.',
   },
   {
     icon: 'check' as const,
-    title: 'Priorytetowe wsparcie',
-    desc: 'Bezpośredni kontakt z zespołem przez cały okres testów',
+    title: 'Bezpośredni kontakt',
+    desc: 'Piszesz do założycieli. Odpowiadamy osobiście.',
   },
 ];
 ---
@@ -34,9 +34,9 @@ const benefits = [
 <section class="early-access" id="early-access">
   <div class="early-access-content">
     <SectionHeader
-      label="Early Access"
-      title="Co zyskujesz dołączając teraz?"
-      description="Pierwsze użytkowniczki mają szczególne przywileje. Dołącz do waitlisty i przetestuj SalonMate przed innymi."
+      label="Wczesny dostęp"
+      title="Dlaczego warto dołączyć teraz?"
+      description="Szukamy pierwszych 100 testerek. Dla nich najlepsze warunki i realny wpływ na produkt."
       centered
     />
     <div class="benefits-grid">
@@ -53,8 +53,8 @@ const benefits = [
       ))}
     </div>
     <div class="early-access-cta">
-      <a href="#waitlist" class="cta-btn">Dołącz do waitlisty →</a>
-      <p class="cta-note">Bez zobowiązań. Odezwiemy się gdy wystartujemy.</p>
+      <a href="/#waitlist" class="cta-btn">Dołączam do wczesnego dostępu →</a>
+      <p class="cta-note">Powiadomimy Cię gdy wystartujemy. Zero zobowiązań.</p>
     </div>
   </div>
 </section>

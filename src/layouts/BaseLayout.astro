@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { siteConfig, analyticsConfig } from '../data/site';
+import { siteConfig, analyticsConfig, turnstileConfig } from '../data/site';
 
 interface Props {
   title?: string;
@@ -15,6 +15,7 @@ const {
 } = Astro.props;
 
 const { googleAnalytics, facebookPixel, microsoftClarity } = analyticsConfig;
+const { siteKey: turnstileSiteKey } = turnstileConfig;
 ---
 
 <!doctype html>
@@ -32,7 +33,7 @@ const { googleAnalytics, facebookPixel, microsoftClarity } = analyticsConfig;
     <meta property="og:type" content="website" />
     <meta property="og:url" content={siteConfig.url} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Odpowiada na DM-y 24/7, umawia wizyty, zna Twój cennik. Dołącz do waitlisty i przetestuj za darmo." />
+    <meta property="og:description" content="Odpowiada na DM-y 24/7, umawia wizyty, zna Twój cennik. Dołącz do listy i przetestuj za darmo." />
     <meta property="og:image" content={ogImage} />
 
     <!-- Favicon -->
@@ -42,41 +43,89 @@ const { googleAnalytics, facebookPixel, microsoftClarity } = analyticsConfig;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Cloudflare Turnstile (anti-bot) -->
+    {turnstileSiteKey && (
+      <>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        <script is:inline define:vars={{ siteKey: turnstileSiteKey }}>
+          window.TURNSTILE_SITE_KEY = siteKey;
+        </script>
+      </>
+    )}
+
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Google Analytics (via Partytown) -->
+    <!-- Google Analytics - Consent Mode v2 (loads immediately but respects consent) -->
     {googleAnalytics && (
       <>
         <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}></script>
-        <script type="text/partytown" set:html={`
+        <script type="text/partytown" define:vars={{ gaId: googleAnalytics }} set:html={`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+
+          // Set default consent (denied) - will be updated by cookie consent banner
           gtag('consent', 'default', {
             ad_storage: 'denied',
             ad_user_data: 'denied',
             ad_personalization: 'denied',
             analytics_storage: 'denied',
+            wait_for_update: 500
           });
-          gtag('config', '${googleAnalytics}');
+
+          gtag('js', new Date());
+          gtag('config', '${gaId}');
+
+          // Check for existing consent
+          try {
+            var consent = JSON.parse(localStorage.getItem('salonmate_cookie_consent') || 'null');
+            if (consent) {
+              gtag('consent', 'update', {
+                ad_storage: consent.marketing ? 'granted' : 'denied',
+                ad_user_data: consent.marketing ? 'granted' : 'denied',
+                ad_personalization: consent.marketing ? 'granted' : 'denied',
+                analytics_storage: consent.analytics ? 'granted' : 'denied'
+              });
+            }
+          } catch(e) {}
         `} />
       </>
     )}
 
-    <!-- Facebook Pixel (via Partytown) -->
+    <!-- Facebook Pixel - Only loads after consent -->
     {facebookPixel && (
       <>
-        <script type="text/partytown" set:html={`
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '${facebookPixel}');
-          fbq('track', 'PageView');
+        <script define:vars={{ fbId: facebookPixel }} set:html={`
+          window.fbPixelId = '${fbId}';
+
+          function loadFacebookPixel() {
+            if (window.fbq) return;
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', window.fbPixelId);
+            fbq('track', 'PageView');
+          }
+
+          // Check existing consent on page load
+          try {
+            var consent = JSON.parse(localStorage.getItem('salonmate_cookie_consent') || 'null');
+            if (consent && consent.marketing) {
+              loadFacebookPixel();
+            }
+          } catch(e) {}
+
+          // Listen for consent updates (custom event from cookie banner)
+          window.addEventListener('consentUpdated', function(e) {
+            var consent = e.detail;
+            if (consent && consent.marketing) {
+              loadFacebookPixel();
+            }
+          });
         `} />
         <noscript>
           <img height="1" width="1" style="display:none" src={`https://www.facebook.com/tr?id=${facebookPixel}&ev=PageView&noscript=1`} />
@@ -84,14 +133,35 @@ const { googleAnalytics, facebookPixel, microsoftClarity } = analyticsConfig;
       </>
     )}
 
-    <!-- Microsoft Clarity (via Partytown) -->
+    <!-- Microsoft Clarity - Only loads after consent -->
     {microsoftClarity && (
-      <script type="text/partytown" set:html={`
-        (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "${microsoftClarity}");
+      <script define:vars={{ clarityId: microsoftClarity }} set:html={`
+        window.clarityId = '${clarityId}';
+
+        function loadClarity() {
+          if (window.clarity) return;
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", window.clarityId);
+        }
+
+        // Check existing consent on page load
+        try {
+          var consent = JSON.parse(localStorage.getItem('salonmate_cookie_consent') || 'null');
+          if (consent && consent.analytics) {
+            loadClarity();
+          }
+        } catch(e) {}
+
+        // Listen for consent updates (custom event from cookie banner)
+        window.addEventListener('consentUpdated', function(e) {
+          var consent = e.detail;
+          if (consent && consent.analytics) {
+            loadClarity();
+          }
+        });
       `} />
     )}
   </head>

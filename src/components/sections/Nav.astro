@@ -8,12 +8,12 @@ import { navLinks, siteConfig } from '../../data/site';
 ---
 
 <nav id="nav">
-  <a href="#" class="logo">{siteConfig.name}<span>.</span></a>
+  <a href="/" class="logo">{siteConfig.name}<span>.</span></a>
   <div class="nav-links">
     {navLinks.map((link) => (
       <a href={link.href}>{link.label}</a>
     ))}
-    <a href="#waitlist" class="nav-cta">Dołącz</a>
+    <a href="/#waitlist" class="nav-cta">Dołącz</a>
   </div>
 </nav>
 

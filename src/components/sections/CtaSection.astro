@@ -7,13 +7,37 @@
 
 <section class="cta" id="waitlist">
   <div class="cta-content">
-    <h2 class="cta-title">Gotowa odzyskać<br />swoje wieczory?</h2>
-    <p class="cta-desc">Zapisz się na listę oczekujących. Pierwsze użytkowniczki dostaną 50% zniżki i darmowy test.</p>
+    <div class="cta-badge">Szukamy pierwszych 100 testerek</div>
+    <h2 class="cta-title">Pomóż nam zbudować<br />coś dla Ciebie</h2>
+    <p class="cta-desc">Dołącz do wczesnego dostępu. Dostaniesz darmowy test + Twój feedback ukształtuje produkt.</p>
     <form class="waitlist-form" id="waitlistForm">
-      <input type="email" placeholder="Twój adres email" required />
-      <button type="submit">Zapisz mnie</button>
+      <input type="text" name="name" placeholder="Twoje imię" required minlength="3" maxlength="100" />
+      <input type="email" name="email" placeholder="Twój adres email" required />
+      <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
+      <button type="submit">Dołączam do listy</button>
     </form>
-    <p class="cta-note">Zero spamu. Odezwiemy się tylko gdy wystartujemy.</p>
+    <div class="cta-trust">
+      <span class="cta-trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        Dane bezpieczne (RODO)
+      </span>
+      <span class="cta-trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        Zero spamu
+      </span>
+      <span class="cta-trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        Powiadomimy gdy wystartujemy
+      </span>
+    </div>
   </div>
 </section>
 
@@ -45,13 +69,14 @@
 
   .waitlist-form {
     display: flex;
+    flex-direction: column;
     gap: 0.75rem;
-    max-width: 480px;
+    max-width: 380px;
     margin: 0 auto 1rem;
   }
 
   .waitlist-form input {
-    flex: 1;
+    width: 100%;
     padding: 1rem 1.25rem;
     border: 1px solid var(--color-soft-brown);
     background: white;
@@ -59,7 +84,7 @@
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s ease;
-    min-width: 0;
+    text-align: center;
   }
 
   .waitlist-form input:focus {
@@ -67,25 +92,52 @@
   }
 
   .waitlist-form button {
-    padding: 1rem 1.75rem;
+    width: 100%;
+    padding: 1.1rem 1.75rem;
     background: var(--color-warm-black);
     color: var(--color-cream);
     border: none;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s ease;
-    white-space: nowrap;
   }
 
   .waitlist-form button:hover {
     background: var(--color-accent);
   }
 
-  .cta-note {
+  .cta-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(196, 113, 91, 0.15);
+    color: #c4715b;
     font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-trust {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .cta-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
     color: var(--color-taupe);
+  }
+
+  .cta-trust-item svg {
+    color: var(--color-success);
+    flex-shrink: 0;
   }
 
   @media (max-width: 1024px) {
@@ -98,15 +150,6 @@
   @media (max-width: 768px) {
     .cta {
       padding: 4rem 1.5rem;
-    }
-
-    .waitlist-form {
-      flex-direction: column;
-    }
-
-    .waitlist-form input,
-    .waitlist-form button {
-      width: 100%;
     }
   }
 

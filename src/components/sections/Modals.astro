@@ -14,12 +14,12 @@ import { siteConfig } from '../../data/site';
     <div class="modal-icon">
       <Icon name="check" size={28} />
     </div>
-    <h3>Dziękujemy!</h3>
+    <h3>Dziękujemy! Jesteś na liście.</h3>
     <p>
-      Jesteś na liście. Odezwiemy się wkrótce.<br /><br />
-      <strong>Mamy prośbę:</strong> Wypełnij krótką ankietę (2 min), żebyśmy zbudowali coś idealnego dla Ciebie.
+      Powiadomimy Cię gdy wystartujemy. Sprawdź też folder spam.<br /><br />
+      <strong>Mamy prośbę:</strong> Wypełnij krótką ankietę (2 min), żebyśmy zbudowali coś idealnego dla Ciebie. Twój głos ma znaczenie!
     </p>
-    <a href={siteConfig.surveyUrl} target="_blank" class="modal-btn">Wypełnij ankietę →</a>
+    <a href={siteConfig.surveyUrl} target="_blank" class="modal-btn">Wypełniam ankietę (2 min) →</a>
     <span class="modal-skip" id="closeModal">Może później</span>
   </div>
 </div>
@@ -31,11 +31,14 @@ import { siteConfig } from '../../data/site';
       <Icon name="x" size={18} />
     </button>
     <h3>Zanim wyjdziesz...</h3>
-    <p>Zostaw email i dowiedz się pierwsza, gdy wystartujemy. Bez spamu — tylko jedno powiadomienie.</p>
+    <p>Zostaw email, a powiadomimy Cię gdy wystartujemy. <strong>Zero spamu</strong> — tylko jedno powiadomienie.</p>
     <form class="exit-popup-form" id="exitForm">
-      <input type="email" placeholder="Twój email" required />
-      <button type="submit">Zapisz</button>
+      <input type="text" name="name" placeholder="Twoje imię" required minlength="3" maxlength="100" />
+      <input type="email" name="email" placeholder="Twój email" required />
+      <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
+      <button type="submit">Powiadom mnie</button>
     </form>
+    <p class="exit-popup-note">Szukamy pierwszych testerek. Dla nich najlepsze warunki.</p>
   </div>
 </div>
 
@@ -214,25 +217,28 @@ import { siteConfig } from '../../data/site';
 
   .exit-popup-form {
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .exit-popup-form input {
-    flex: 1;
+    width: 100%;
     padding: 1rem;
     border: 1px solid var(--color-soft-brown);
     font-family: inherit;
     font-size: 1rem;
     outline: none;
-    min-width: 0;
+    text-align: center;
   }
 
   .exit-popup-form button {
-    padding: 1rem 1.5rem;
+    width: 100%;
+    padding: 1.1rem 1.5rem;
     background: var(--color-warm-black);
     color: white;
     border: none;
     font-family: inherit;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -242,6 +248,12 @@ import { siteConfig } from '../../data/site';
     background: var(--color-accent);
   }
 
+  .exit-popup-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--color-taupe);
+  }
+
   @media (max-width: 768px) {
     .modal {
       padding: 2rem 1.5rem;
@@ -249,10 +261,6 @@ import { siteConfig } from '../../data/site';
 
     .exit-popup-content {
       padding: 2rem 1.5rem;
-    }
-
-    .exit-popup-form {
-      flex-direction: column;
     }
   }
 

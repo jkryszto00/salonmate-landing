@@ -25,6 +25,7 @@ import FAQ from '../components/sections/FAQ.astro';
 import CtaSection from '../components/sections/CtaSection.astro';
 import Footer from '../components/sections/Footer.astro';
 import Modals from '../components/sections/Modals.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 ---
 
 <BaseLayout>
@@ -45,9 +46,9 @@ import Modals from '../components/sections/Modals.astro';
 
   <!-- Mini CTA 1 -->
   <MiniCta
-    title="Brzmi znajomo?"
-    description="Dołącz do waitlisty. Pierwsze użytkowniczki testują za darmo."
-    buttonText="Chcę przetestować"
+    title="Brzmi jak Twój dzień?"
+    description="Tworzymy rozwiązanie tego problemu. Dołącz i pomóż nam zbudować coś idealnego dla Ciebie."
+    buttonText="Chcę wiedzieć więcej"
   />
 
   <!-- For Who Section -->
@@ -64,9 +65,9 @@ import Modals from '../components/sections/Modals.astro';
 
   <!-- Mini CTA 2 -->
   <MiniCta
-    title="Proste, prawda?"
-    description="Zapisz się i przetestuj przed innymi."
-    buttonText="Dołącz do waitlisty"
+    title="5 minut konfiguracji. Zero wiedzy technicznej."
+    description="To wszystko co potrzeba. Dołącz do listy oczekujących i bądź pierwsza gdy wystartujemy."
+    buttonText="Dołącz do listy"
   />
 
   <!-- Security -->
@@ -89,6 +90,9 @@ import Modals from '../components/sections/Modals.astro';
 
   <!-- Modals -->
   <Modals />
+
+  <!-- Cookie Consent -->
+  <CookieConsent />
 
   <!-- Client-side scripts -->
   <script>
